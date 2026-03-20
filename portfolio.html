@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: white;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      background: #020617;
+      position: sticky;
+      top: 0;
+    }
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    section {
+      padding: 60px 40px;
+      min-height: 100vh;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      border-bottom: 2px solid #38bdf8;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .social-icons a {
+      color: white;
+      font-size: 30px;
+      transition: 0.3s;
+    }
+
+    .social-icons a:hover {
+      color: #38bdf8;
+      transform: scale(1.2);
+    }
+
+    .card {
+      background: #020617;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>My Portfolio</h1>
+  <nav>
+    <a onclick="scrollToSection('about')">About</a>
+    <a onclick="scrollToSection('education')">Education</a>
+    <a onclick="scrollToSection('projects')">Projects</a>
+    <a onclick="scrollToSection('skills')">Skills</a>
+  </nav>
+</header>
+
+<section id="about">
+  <h2>About</h2>
+
+  <div class="about-container">
+    <img src="C:\Users\kaush\OneDrive\Attachments\project folder\m.jpeg" alt="Profile Picture" class="profile-img" style="width:150px;height:auto;border-radius:50%;float:left;margin-right:20px;">
+
+    <div>
+      <p><i>Hello! I am KUNDURU NITHIN REDDY an aspiring web developer and student of Amrita University, Kollam, Kerala. I strive to create innovative and user-friendly web applications for everyone and I hope for a good future where I can continue to do so.</i></p>
+
+      <p><i>In my free time, I enjoy exploring new technologies, working on personal projects, and contributing to open-source communities. I am passionate about learning and always eager to take on new challenges.</i></p>
+      <p><i>Feel free to connect with me on social media or check out my projects below!</i></p>
+      
+      <h2>Connect with Me</h2><br>
+      <div class="social-icons" style="display: flex;">
+        <a href="https://www.linkedin.com/in/kunduru-nithin-reddy-2ab335372" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.instagram.com/your_instagram_handle" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://github.com/KNithin1976" target="_blank"><i class="fab fa-github"></i></a>
+      </div>
+    </div>
+
+      
+  </div>
+</section>
+
+<section id="education">
+  <h2>Education</h2>
+  <div class="card">Class 12-CBSE  - Narayana Junior College - Hyderabad</div>
+  <div class="card">Class 10 -CBSE- Montfort school CBSE - Warangal</div>
+</section>
+
+<section id="projects">
+  <h2>Projects</h2>
+  <div class="card"><a href="C:\Users\kaush\OneDrive\Attachments\game.html" target="_blank">Project 1 - An Interactive Game</a></div>
+  <div class="card"><a href="C:\Users\kaush\OneDrive\Attachments\map.html" target="_blank">Project 2 - A Interactive Map</a></div>
+</section>
+
+<section id="skills">
+  <h2>Skills</h2>
+  <div class="card"><h1><i class="fab fa-js"></i></h1>JavaScript</div>
+  <div class="card"><h1><i class="fab fa-css3"></i></h1>CSS</div>
+  <div class="card"><h1><i class="fab fa-html5"></i></h1>HTML</div>
+  <div class="card"><h1><i class="fab fa-java"></i></h1>JAVA</div>
+  <div class="card"><h1><i class="fab fa-python"></i></h1>Python</div>
+</section>
+
+<script>
+  function scrollToSection(id) {
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
