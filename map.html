@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Country Guessing Game</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #1e272e;
+      color: white;
+      text-align: center;
+    }
+
+    header {
+      background: #485460;
+      padding: 15px;
+    }
+
+    #map {
+      height: 70vh;
+    }
+
+    #panel {
+      padding: 15px;
+      background: #2f3640;
+    }
+
+    input {
+      padding: 8px;
+      font-size: 16px;
+      width: 200px;
+    }
+
+    button {
+      padding: 8px 15px;
+      font-size: 16px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+
+    #result {
+      margin-top: 10px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🌍 Country Guessing Game</h1>
+  <p>Type the name of the highlighted country!</p>
+</header>
+
+<div id="map"></div>
+
+<div id="panel">
+  <button onclick="startGame()">Start Game</button>
+  <br><br>
+  <form onsubmit="event.preventDefault(); checkAnswer();">
+  <input type="text" id="answer" placeholder="Enter country name">
+  <button type="submit">Submit</button>
+</form>
+  <button onclick="checkAnswer()">Submit</button>
+  <div id="result"></div>
+</div>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+  const map = L.map('map').setView([20, 0], 2);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap'
+  }).addTo(map);
+
+  let geoLayer;
+  let currentCountry = "";
+
+  fetch('https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json')
+    .then(res => res.json())
+    .then(data => {
+      geoLayer = L.geoJSON(data, {
+        style: {
+          color: '#fff',
+          weight: 1,
+          fillColor: '#576574',
+          fillOpacity: 0.5
+        }
+      }).addTo(map);
+
+      window.allCountries = geoLayer.getLayers();
+    });
+
+  function startGame() {
+    document.getElementById('result').textContent = '';
+    document.getElementById('answer').value = '';
+
+    // Reset styles
+    geoLayer.eachLayer(layer => {
+      geoLayer.resetStyle(layer);
+    });
+
+    // Pick random country
+    const randomLayer = allCountries[Math.floor(Math.random() * allCountries.length)];
+    currentCountry = randomLayer.feature.properties.name;
+
+    // Highlight it
+    randomLayer.setStyle({ fillColor: 'orange', fillOpacity: 0.8 });
+
+    // Zoom to country
+    map.fitBounds(randomLayer.getBounds());
+  }
+
+  function checkAnswer() {
+    const userAnswer = document.getElementById('answer').value.trim().toLowerCase();
+    const correct = currentCountry.toLowerCase();
+
+    if (!currentCountry) return;
+
+    if (userAnswer === correct) {
+      document.getElementById('result').textContent = '✅ Correct! It is ' + currentCountry;
+    } else {
+      document.getElementById('result').textContent = '❌ Wrong! Correct answer: ' + currentCountry;
+    }
+  }
+</script>
+
+</body>
+</html>
